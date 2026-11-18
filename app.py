@@ -147,3 +147,38 @@ st.info(
     "MarketPulse signals are educational indicators, "
     "not financial advice or guaranteed predictions."
 )
+
+
+import urllib.parse
+import urllib.request
+
+def send_telegram_message(message):
+    token = st.secrets["BOT_TOKEN"]
+    chat_id = st.secrets["CHAT_ID"]
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+
+    data = urllib.parse.urlencode({
+        "chat_id": chat_id,
+        "text": message
+    }).encode()
+
+    request = urllib.request.Request(url, data=data)
+
+    with urllib.request.urlopen(request, timeout=15) as response:
+        return response.status == 200
+
+st.divider()
+st.header("📲 Telegram Notifications")
+
+if st.button("Send Test Telegram Alert"):
+    try:
+        success = send_telegram_message(
+            "🚀 MARKETPULSE\n\nTelegram connection successful!\nEducational paper-trading mode."
+        )
+
+        if success:
+            st.success("Test alert sent successfully!")
+
+    except Exception:
+        st.error("Telegram test failed. Check your Secrets settings.")
