@@ -180,5 +180,7 @@ if st.button("Send Test Telegram Alert"):
         if success:
             st.success("Test alert sent successfully!")
 
-    except Exception:
-        st.error("Telegram test failed. Check your Secrets settings.")
+    except Exception as error:
+    st.error(
+        f"Telegram error: {type(error).__name__}: {error}"
+    )
