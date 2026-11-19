@@ -217,12 +217,7 @@ else:
 
 st.caption("Signals require EMA and RSI confirmation.")
 
-    st.success("🟢 BULLISH")
-elif signal == "BEARISH":
-    st.error("🔴 BEARISH")
-else:
-    st.warning("🟡 NEUTRAL")
-
+    
 st.caption("Signals require EMA and RSI confirmation.")
 
 st.divider()
