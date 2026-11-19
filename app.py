@@ -217,9 +217,6 @@ else:
 
 st.caption("Signals require EMA and RSI confirmation.")
 
-    
-st.caption("Signals require EMA and RSI confirmation.")
-
 st.divider()
 st.subheader("📝 Paper Trade Journal")
 
