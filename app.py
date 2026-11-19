@@ -142,13 +142,12 @@ for market, ticker in markets.items():
             f"Maximum: {data_15m['Close'].max():.5f}"
         )
         
-        chart_data = data_15m[["Close"]].copy()
+        chart_data = data_15m[["Close", "EMA20", "EMA50"]].copy()
         chart_data.index = pd.to_datetime(chart_data.index)
 
         st.line_chart(
             chart_data,
-            y="Close",
-            height=250,
+            height=300,
             use_container_width=True
         )
 
