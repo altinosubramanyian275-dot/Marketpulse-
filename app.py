@@ -184,3 +184,62 @@ if st.button("Send Test Telegram Alert"):
         st.error(
             f"Telegram error: {type(error).__name__}: {error}"
         )
+
+st.divider()
+st.header("📊 MarketPulse Trade Dashboard")
+
+st.info("Educational signals only. Paper-trading mode.")
+
+if "trade_history" not in st.session_state:
+    st.session_state.trade_history = []
+
+st.subheader("📈 Signal Confirmation")
+
+ema20 = st.number_input("EMA 20", value=0.0, format="%.5f")
+ema50 = st.number_input("EMA 50", value=0.0, format="%.5f")
+rsi = st.number_input("RSI", min_value=0.0, max_value=100.0, value=50.0)
+
+if ema20 > ema50 and rsi > 50:
+    signal = "BULLISH"
+elif ema20 < ema50 and rsi < 50:
+    signal = "BEARISH"
+else:
+    signal = "NEUTRAL"
+
+st.subheader("Current Market Signal")
+
+if signal == "BULLISH":
+    st.success("🟢 BULLISH")
+elif signal == "BEARISH":
+    st.error("🔴 BEARISH")
+else:
+    st.warning("🟡 NEUTRAL")
+
+st.caption("Signals require EMA and RSI confirmation.")
+
+    st.success("🟢 BULLISH")
+elif signal == "BEARISH":
+    st.error("🔴 BEARISH")
+else:
+    st.warning("🟡 NEUTRAL")
+
+st.caption("Signals require EMA and RSI confirmation.")
+
+st.divider()
+st.subheader("📝 Paper Trade Journal")
+
+market = st.text_input("Market", placeholder="e.g. EUR/USD")
+entry = st.number_input("Entry Price", min_value=0.0, format="%.5f")
+stop_loss = st.number_input("Stop Loss", min_value=0.0, format="%.5f")
+take_profit = st.number_input("Take Profit", min_value=0.0, format="%.5f")
+
+if st.button("Save Paper Trade"):
+    if market and entry > 0 and stop_loss > 0 and take_profit > 0:
+        st.session_state.trade_history.append({
+            "Market": market,
+            "Signal": signal,
+            "Entry": entry,
+            "Stop Loss": stop_loss,
+            "Take Profit": take_profit
+        })
+        
