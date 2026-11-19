@@ -73,6 +73,24 @@ def get_signal(data):
 
     return "NEUTRAL"
 
+def get_trend_strength(data):
+    if data.empty or len(data) < 50:
+        return None
+
+    latest = data.iloc[-1]
+
+    if pd.isna(latest["EMA20"]) or pd.isna(latest["EMA50"]):
+        return None
+
+    price = latest["Close"]
+
+    if price == 0:
+        return None
+
+    strength = abs(latest["EMA20"] - latest["EMA50"]) / price * 100
+
+    return strength
+
 @st.cache_data(ttl=300)
 def get_market_data(ticker, interval, period):
     data = yf.Ticker(ticker).history(
