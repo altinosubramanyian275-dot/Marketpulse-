@@ -151,11 +151,39 @@ for market, ticker in markets.items():
             chart_data[["Close", "EMA20", "EMA50"]].tail(3)
         )
 
-        st.line_chart(
-            chart_data,
-            height=300,
-            use_container_width=True
-        )
+        fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=chart_data.index,
+    y=chart_data["Close"],
+    name="Price",
+    line=dict(color="white", width=2)
+))
+
+fig.add_trace(go.Scatter(
+    x=chart_data.index,
+    y=chart_data["EMA20"],
+    name="EMA20",
+    line=dict(color="orange", width=2)
+))
+
+fig.add_trace(go.Scatter(
+    x=chart_data.index,
+    y=chart_data["EMA50"],
+    name="EMA50",
+    line=dict(color="cyan", width=2)
+))
+
+fig.update_layout(
+    height=400,
+    template="plotly_dark",
+    title="Price vs EMA20 and EMA50",
+    xaxis_title="Time",
+    yaxis_title="Price",
+    hovermode="x unified"
+)
+
+st.plotly_chart(fig, use_container_width=True)
         
 
     except Exception as error:
