@@ -143,7 +143,7 @@ for market, ticker in markets.items():
             f"Maximum: {data_15m['Close'].max():.5f}"
         )
 
-        chart_data = data_15m[["Close", "EMA20", "EMA50"]].copy()
+        chart_data = data_15m[["Close", "EMA20", "EMA50"]].tail(100).copy()
         chart_data.index = pd.to_datetime(chart_data.index)
 
         st.write(
