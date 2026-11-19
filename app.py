@@ -132,7 +132,6 @@ for market, ticker in markets.items():
         st.write(
             f"1-hour trend: **{signal_1h}**"
         )
-        )
         st.caption(
     f"Chart points: {data_15m['Close'].notna().sum()} | "
     f"Unique prices: {data_15m['Close'].nunique()}"
