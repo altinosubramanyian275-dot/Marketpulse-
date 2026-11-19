@@ -136,6 +136,12 @@ for market, ticker in markets.items():
     f"Chart points: {data_15m['Close'].notna().sum()} | "
     f"Unique prices: {data_15m['Close'].nunique()}"
         )
+
+        st.caption(
+            f"Minimum: {data_15m['Close'].min():.5f} | "
+            f"Maximum: {data_15m['Close'].max():.5f}"
+        )
+        
         st.line_chart(
             data_15m["Close"],
             height=180
