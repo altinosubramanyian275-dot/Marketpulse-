@@ -145,7 +145,10 @@ for market, ticker in markets.items():
         chart_data = data_15m[["Close", "EMA20", "EMA50"]].copy()
         chart_data.index = pd.to_datetime(chart_data.index)
 
-        st.line_chart(
+    st.write(
+            chart_data[["Close", "EMA20", "EMA50"]].tail(3)
+    )
+    st.line_chart(
             chart_data,
             height=300,
             use_container_width=True
