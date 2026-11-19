@@ -137,22 +137,25 @@ for market, ticker in markets.items():
     f"Unique prices: {data_15m['Close'].nunique()}"
         )
 
+        
         st.caption(
             f"Minimum: {data_15m['Close'].min():.5f} | "
             f"Maximum: {data_15m['Close'].max():.5f}"
         )
-        
+
         chart_data = data_15m[["Close", "EMA20", "EMA50"]].copy()
         chart_data.index = pd.to_datetime(chart_data.index)
 
-    st.write(
+        st.write(
             chart_data[["Close", "EMA20", "EMA50"]].tail(3)
-    )
-    st.line_chart(
+        )
+
+        st.line_chart(
             chart_data,
             height=300,
             use_container_width=True
         )
+        
 
     except Exception as error:
         st.warning(f"Could not load {market}: {error}")
