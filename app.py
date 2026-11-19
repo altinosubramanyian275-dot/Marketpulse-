@@ -133,6 +133,10 @@ for market, ticker in markets.items():
             f"1-hour trend: **{signal_1h}**"
         )
 
+        st.caption(
+    f"Chart points: {data_15m['Close'].notna().sum()} | "
+    f"Unique prices: {data_15m['Close'].nunique()}"
+        )
         st.line_chart(
             data_15m["Close"],
             height=180
